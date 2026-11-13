@@ -31,13 +31,13 @@ jobs:
                 end" \
             -c qa!
 
-      - name: @token scanning and insertion
+      - name: "token scanning and insertion"
         run: nvim --headless -u NONE -l tests/token_spec.lua
 
-      - name: clusters, modes, locators
+      - name: "clusters, modes, locators"
         run: nvim --headless -u NONE -l tests/mode_swap_spec.lua
 
-      - name: numeric styles and :ZNormalize
+      - name: "numeric styles and ZNormalize"
         run: nvim --headless -u NONE -l tests/numeric_spec.lua
 
       # compat/semantic/attachment/integration need a running Zotero:
