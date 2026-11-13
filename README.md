@@ -1,5 +1,9 @@
 # zotcite-extra
 
+[![test](https://github.com/fabea87/zotcite-extra/actions/workflows/test.yml/badge.svg)](https://github.com/fabea87/zotcite-extra/actions/workflows/test.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![neovim 0.10+](https://img.shields.io/badge/neovim-0.10%2B-57A143.svg)](https://neovim.io)
+
 **Word-style citations in Neovim.** Pick references from Zotero, insert them as
 Pandoc citations, see them rendered by Zotero's own CSL engine — then swap the
 mode, set a locator, or refresh the reference list, all without leaving the
@@ -98,7 +102,8 @@ No keybindings outside `<leader>z*`, no global options touched beyond
 
 ## Configuration
 
-Everything is optional; the defaults are:
+Everything is optional; the highlights (see `lua/zotcite_extra/config.lua` for
+the rest):
 
 ```lua
 require("zotcite_extra").setup({
