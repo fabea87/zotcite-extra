@@ -1,0 +1,13 @@
+# editor / OS
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# test & profiling leftovers
+tests/.cache/
+luacov.*.out
+
+# local session files from the specs
+*.log

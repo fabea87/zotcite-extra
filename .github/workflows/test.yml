@@ -1,0 +1,44 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  logic:
+    name: pure logic (no Zotero)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+
+      - name: versions
+        run: nvim --version | head -3
+
+      - name: every module compiles
+        run: |
+          nvim --headless -u NONE \
+            -c "lua for _, f in ipairs(vim.fn.glob('lua/**/*.lua', false, true)) do
+                  local chunk, err = loadfile(f)
+                  assert(chunk, f .. ': ' .. tostring(err))
+                end" \
+            -c qa!
+
+      - name: @token scanning and insertion
+        run: nvim --headless -u NONE -l tests/token_spec.lua
+
+      - name: clusters, modes, locators
+        run: nvim --headless -u NONE -l tests/mode_swap_spec.lua
+
+      - name: numeric styles and :ZNormalize
+        run: nvim --headless -u NONE -l tests/numeric_spec.lua
+
+      # compat/semantic/attachment/integration need a running Zotero:
+      # run them locally with `nvim --headless -u ~/.config/nvim/init.lua -l tests/<spec>.lua`
